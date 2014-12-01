@@ -21,6 +21,17 @@ class Test extends CI_Controller {
     public function index()
     {
         $this->load->view('templates/header');
+
+        $data['content'] = $this->load->view('product_buttons_view','',true);
+
+        $data['leftColumn'] = $this->load->view('templates/left_column', $data, true);
+
+        $data['content'] = "lalala";
+
+        $data['rightColumn'] = $this->load->view('templates/right_column',$data,true);
+
+        $this->load->view('templates/row',$data);
+
         $this->load->view('templates/footer');
     }
 }

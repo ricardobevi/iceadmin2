@@ -1,3 +1,30 @@
 body {
   padding-top: 50px;
 }
+
+.maincontent {
+	padding-top: 20px;
+}
+
+
+
+.numpad {
+    width: 442px;
+    display: inline-block;
+}
+
+.block {
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    margin: 5px;
+    float: right;
+}
+
+.blockv2 {
+    height: 205px;
+}
+
+.blockh2 {
+    width: 205px;
+}
