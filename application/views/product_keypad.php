@@ -1,11 +1,11 @@
 
 <div class="panel panel-default">
 
-	<div class="panel-body">
+	<div class="panel-body text-center">
 
 
 
-		<div class="btn-group btn-group-lg numpad" role="group">
+		<div class="btn-group btn-group-lg" role="group">
 
 			<button type="button" class="btn btn-default btn-block block">Cucu</button>
 			<button type="button" class="btn btn-default btn-block block">Cucu
@@ -45,7 +45,7 @@
 
 	</div>
 
-	<div class="panel-footer">Preciona CTRL para más opciones.</div>
+	<div class="panel-footer">Presiona <kbd>CTRL</kbd> para más opciones.</div>
 
 </div>
 

@@ -11,7 +11,7 @@
 
 <!-- link rel="icon" href="favicon.ico" -->
 
-<title>IceAdmin2.0</title>
+<title>IceAdmin2</title>
 
 <!-- Bootstrap core CSS -->
 <link href="<?php echo base_url("public/css/bootstrap.min.css");?>"
@@ -39,7 +39,7 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">Ice Admin 2.0</a>
+				<a class="navbar-brand" href="#">Ice Admin 2</a>
 			</div>
 			<div id="navbar" class="collapse navbar-collapse">
 				<ul class="nav navbar-nav">
