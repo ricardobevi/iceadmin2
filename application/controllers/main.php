@@ -4,15 +4,22 @@ if (! defined ( 'BASEPATH' ))
 
 class Test extends CI_Controller {
 
+    public function __construct() {
+
+        parent::__construct ();
+        //$this->load->controller ( 'quick_access' );
+
+    }
+
     public function index() {
 
         $this->load->view ( 'templates/header' );
 
-        $data ['content'] = $this->load->view ( 'product_keypad', '', true );
+        $data ['content'] = $this->quick_access->build_view();
 
         $data ['leftColumn'] = $this->load->view ( 'templates/left_column', $data, true );
 
-        $data ['content'] = $this->load->view ( 'ticket_list', '', true );
+        $data ['content'] = $this->load->view ( 'ticket_list_view', '', true );
 
         $data ['rightColumn'] = $this->load->view ( 'templates/right_column', $data, true );
 
