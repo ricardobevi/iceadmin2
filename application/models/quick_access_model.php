@@ -1,6 +1,6 @@
 <?php
 
-class Quick_Access_model extends CI_Model {
+class Quick_Access_Model extends CI_Model {
 
     private $CI;
 
@@ -11,7 +11,7 @@ class Quick_Access_model extends CI_Model {
     }
 
 
-    public function getQuickAccesses($group = 1) {
+    public function get_quick_accesses($group = 1) {
 
         $sql =
         "SELECT

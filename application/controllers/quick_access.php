@@ -14,7 +14,7 @@ class Quick_Access extends CI_Controller {
 
     public function index() {
 
-        $data ['quickaccess'] = $this->quick_access_model->getQuickAccesses ();
+        $data ['quickaccess'] = $this->quick_access_model->get_quick_accesses ();
 
         $this->load->view ( 'quick_access_view', $data );
 
@@ -22,7 +22,7 @@ class Quick_Access extends CI_Controller {
 
     public function group($group = 1) {
 
-        $data ['quickaccess'] = $this->quick_access_model->getQuickAccesses ($group);
+        $data ['quickaccess'] = $this->quick_access_model->get_quick_accesses ($group);
 
         $this->load->view ( 'quick_access_view', $data );
 

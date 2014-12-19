@@ -31,9 +31,9 @@
 
     var _DEBUG = true;
 
-    var quickAccessUrl = "<?php echo base_url('index.php/quick_access');?>";
+    var quickAccessUrl = "<?php echo site_url('quick_access');?>";
 
-    var ticketListUrl = "<?php echo base_url('index.php/ticket_list');?>";
+    var ticketListUrl = "<?php echo site_url('ticket_list');?>";
 
     </script>
 

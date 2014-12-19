@@ -1,13 +1,24 @@
 <?php
 
-class QuickAccess_model extends CI_Model {
+class Ticket_List_Model extends CI_Model {
 
     public $_table = 'product';
 
     public function __construct() {
 
         $this->load->database ();
+        $this->load->library('session');
 
+    }
+
+    public function add_product(){
+        $newdata = array(
+                'username'  => 'johndoe',
+                'email'     => 'johndoe@some-site.com',
+                'logged_in' => TRUE
+        );
+
+        $this->session->set_userdata($newdata);
     }
 
     public function get_products() {

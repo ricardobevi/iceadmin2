@@ -8,6 +8,7 @@
 		</tr>
 	</thead>
 	<tbody>
+
 		<tr>
 			<td class="ticket-list-row">1 Kg</td>
 			<td class="ticket-list-row">
