@@ -8,23 +8,23 @@ class Quick_Access extends CI_Controller {
     public function __construct() {
 
         parent::__construct ();
-        $this->load->model ( 'quickaccess_model' );
+        $this->load->model ( 'quick_access_model' );
 
     }
 
     public function index() {
 
-        $data ['quickaccess'] = $this->quickaccess_model->getQuickAccesses ();
+        $data ['quickaccess'] = $this->quick_access_model->getQuickAccesses ();
 
-        $this->load->view ( 'product_keypad_view', $data );
+        $this->load->view ( 'quick_access_view', $data );
 
     }
 
     public function group($group = 1) {
 
-        $data ['quickaccess'] = $this->quickaccess_model->getQuickAccesses ($group);
+        $data ['quickaccess'] = $this->quick_access_model->getQuickAccesses ($group);
 
-        $this->load->view ( 'product_keypad_view', $data );
+        $this->load->view ( 'quick_access_view', $data );
 
     }
 

@@ -1,6 +1,6 @@
 <?php
 
-class QuickAccess_model extends CI_Model {
+class Quick_Access_model extends CI_Model {
 
     private $CI;
 

@@ -33,6 +33,8 @@
 
     var quickAccessUrl = "<?php echo base_url('index.php/quick_access');?>";
 
+    var ticketListUrl = "<?php echo base_url('index.php/ticket_list');?>";
+
     </script>
 
     <script	src="<?php echo base_url("public/js/jquery.min.js");?>"></script>

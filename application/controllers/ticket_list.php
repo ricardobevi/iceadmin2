@@ -8,15 +8,15 @@ class Ticket_List extends CI_Controller {
     public function __construct() {
 
         parent::__construct ();
-        $this->load->model ( 'quickaccess_model' );
+        //$this->load->model ( 'quickaccess_model' );
 
     }
 
     public function index() {
 
-        $data ['quickaccess'] = $this->quickaccess_model->getQuickAccesses ();
+        //$data ['quickaccess'] = $this->quickaccess_model->getQuickAccesses ();
 
-        $this->load->view ( 'product_keypad_view', $data );
+        $this->load->view ( 'ticket_list_view' );
 
     }
 
