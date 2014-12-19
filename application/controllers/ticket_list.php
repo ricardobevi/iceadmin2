@@ -3,7 +3,7 @@ if (! defined ( 'BASEPATH' ))
     exit ( 'No direct script access allowed' );
 
 
-class Quick_Access extends CI_Controller {
+class Ticket_List extends CI_Controller {
 
     public function __construct() {
 
@@ -20,15 +20,8 @@ class Quick_Access extends CI_Controller {
 
     }
 
-    public function group($group = 1) {
-
-        $data ['quickaccess'] = $this->quickaccess_model->getQuickAccesses ($group);
-
-        $this->load->view ( 'product_keypad_view', $data );
-
-    }
 
 }
 
 /* End of file quick_access.php */
-/* Location: ./application/controllers/quick_access.php */
+/* Location: ./application/controllers/ticket_list.php */

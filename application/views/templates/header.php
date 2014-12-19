@@ -26,22 +26,18 @@
           <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
 
-    <script	src="<?php echo base_url("public/js/jquery.min.js");?>"></script>
 
     <script type="text/JavaScript">
-      $(document).ready(function(){
-          $("#quick_access").load("<?php echo base_url("index.php/quick_access");?>");
-      });
 
+    var _DEBUG = true;
 
-      $(document).keydown(function(event) {
-          switch(event.keyCode){
-              case 17:
-                  alert("ctrl");
-                  break;
-          }
-      });
+    var quickAccessUrl = "<?php echo base_url('index.php/quick_access');?>";
+
     </script>
+
+    <script	src="<?php echo base_url("public/js/jquery.min.js");?>"></script>
+
+    <script type="text/JavaScript" src="<?php echo base_url("public/js/billing.js");?>"></script>
 
 </head>
 
@@ -67,6 +63,8 @@
 			<!--/.nav-collapse -->
 		</div>
 	</nav>
+
+
 
 	<div class="container">
 

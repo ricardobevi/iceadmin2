@@ -4,6 +4,7 @@
 </div>
 <!-- /.container -->
 
+<div id="debug"></div>
 
 <!-- Bootstrap core JavaScript
     ================================================== -->
