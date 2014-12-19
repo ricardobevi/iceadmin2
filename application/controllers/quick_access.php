@@ -16,23 +16,9 @@ class Quick_Access extends CI_Controller {
 
         $data ['quickaccess'] = $this->quickaccess_model->getQuickAccesses ();
 
-        $this->load->view ( 'templates/header' );
-
         $this->load->view ( 'product_keypad_view', $data );
 
-        $this->load->view ( 'templates/footer' );
-
     }
-
-    public function build_view(){
-
-        $data ['quickaccess'] = $this->quickaccess_model->getQuickAccesses ();
-
-        $view = $this->load->view ( 'product_keypad_view', $data, true );
-
-        return view;
-    }
-
 
 }
 

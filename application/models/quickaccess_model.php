@@ -11,7 +11,7 @@ class QuickAccess_model extends CI_Model {
     }
 
 
-    public function getQuickAccesses() {
+    public function getQuickAccesses($group = 1) {
 
         $sql =
         "SELECT
@@ -19,6 +19,7 @@ class QuickAccess_model extends CI_Model {
                 p.label
          FROM
                 `quick_access` qa JOIN product p ON qa.product_id = p.id
+         WHERE `qa`.`group` = " . $group . "
          ORDER BY `qa`.`position`, `qa`.`group`";
 
         $query = $this->db->query($sql);

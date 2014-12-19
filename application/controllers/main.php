@@ -2,7 +2,7 @@
 if (! defined ( 'BASEPATH' ))
     exit ( 'No direct script access allowed' );
 
-class Test extends CI_Controller {
+class Main extends CI_Controller {
 
     public function __construct() {
 
@@ -15,11 +15,9 @@ class Test extends CI_Controller {
 
         $this->load->view ( 'templates/header' );
 
-        $data ['content'] = $this->quick_access->build_view();
+        $data ['content'] = '';
 
         $data ['leftColumn'] = $this->load->view ( 'templates/left_column', $data, true );
-
-        $data ['content'] = $this->load->view ( 'ticket_list_view', '', true );
 
         $data ['rightColumn'] = $this->load->view ( 'templates/right_column', $data, true );
 
