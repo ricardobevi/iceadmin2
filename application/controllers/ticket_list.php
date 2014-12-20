@@ -14,12 +14,21 @@ class Ticket_List extends CI_Controller {
 
     public function index() {
 
-        $this->ticket_list_model->add_product ();
+        //$this->ticket_list_model->add_product ();
 
         $this->load->view ( 'ticket_list_view');
 
     }
 
+    public function add_product( $product_id, $quantity ){
+        $this->ticket_list_model->add_product ($product_id, $quantity);
+        $this->load->view ( 'ticket_list_view');
+    }
+
+    public function del_product($product_id){
+        $this->ticket_list_model->del_product ($product_id);
+        $this->load->view ( 'ticket_list_view');
+    }
 
 }
 
