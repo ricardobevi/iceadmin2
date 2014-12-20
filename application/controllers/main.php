@@ -7,7 +7,6 @@ class Main extends CI_Controller {
     public function __construct() {
 
         parent::__construct ();
-        //$this->load->controller ( 'quick_access' );
 
     }
 
@@ -15,13 +14,7 @@ class Main extends CI_Controller {
 
         $this->load->view ( 'templates/header' );
 
-        $data ['content'] = '';
-
-        $data ['leftColumn'] = $this->load->view ( 'templates/left_column', $data, true );
-
-        $data ['rightColumn'] = $this->load->view ( 'templates/right_column', $data, true );
-
-        $this->load->view ( 'templates/row', $data );
+        $this->load->view ( 'ticket/ticket_view' );
 
         $this->load->view ( 'templates/footer' );
 

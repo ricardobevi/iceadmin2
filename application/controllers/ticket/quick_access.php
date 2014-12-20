@@ -8,7 +8,7 @@ class Quick_Access extends CI_Controller {
     public function __construct() {
 
         parent::__construct ();
-        $this->load->model ( 'quick_access_model' );
+        $this->load->model ( 'ticket/quick_access_model' );
 
     }
 
@@ -16,7 +16,7 @@ class Quick_Access extends CI_Controller {
 
         $data ['quickaccess'] = $this->quick_access_model->get_quick_accesses ();
 
-        $this->load->view ( 'quick_access_view', $data );
+        $this->load->view ( 'ticket/quick_access_view', $data );
 
     }
 
@@ -24,7 +24,7 @@ class Quick_Access extends CI_Controller {
 
         $data ['quickaccess'] = $this->quick_access_model->get_quick_accesses ($group);
 
-        $this->load->view ( 'quick_access_view', $data );
+        $this->load->view ( 'ticket/quick_access_view', $data );
 
     }
 

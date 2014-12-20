@@ -31,15 +31,18 @@
 
     var _DEBUG = true;
 
-    var quickAccessUrl = "<?php echo site_url('quick_access');?>";
+    var ticketUrl = "<?php echo site_url('ticket/ticket');?>";
 
-    var ticketListUrl = "<?php echo site_url('ticket_list');?>";
+    var quickAccessUrl = "<?php echo site_url('ticket/quick_access');?>";
+
+    var ticketListUrl = "<?php echo site_url('ticket/ticket_list');?>";
 
     </script>
 
-    <script	src="<?php echo base_url("public/js/jquery.min.js");?>"></script>
+    <script	src="<?php echo base_url("public/js/vendor/jquery.min.js");?>"></script>
 
-    <script type="text/JavaScript" src="<?php echo base_url("public/js/billing.js");?>"></script>
+    <script type="text/JavaScript" src="<?php echo base_url("public/js/main.js");?>"></script>
+
 
 </head>
 
@@ -68,5 +71,5 @@
 
 
 
-	<div class="container">
+	<div class="container" id="container">
 

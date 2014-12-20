@@ -8,7 +8,7 @@ class Ticket_List extends CI_Controller {
     public function __construct() {
 
         parent::__construct ();
-        $this->load->model ( 'ticket_list_model' );
+        $this->load->model ( 'ticket/ticket_list_model' );
 
     }
 
@@ -16,18 +16,18 @@ class Ticket_List extends CI_Controller {
 
         //$this->ticket_list_model->add_product ();
 
-        $this->load->view ( 'ticket_list_view');
+        $this->load->view ( 'ticket/ticket_list_view');
 
     }
 
     public function add_product( $product_id, $quantity ){
         $this->ticket_list_model->add_product ($product_id, $quantity);
-        $this->load->view ( 'ticket_list_view');
+        $this->load->view ( 'ticket/ticket_list_view');
     }
 
     public function del_product($product_id){
         $this->ticket_list_model->del_product ($product_id);
-        $this->load->view ( 'ticket_list_view');
+        $this->load->view ( 'ticket/ticket_list_view');
     }
 
 }
