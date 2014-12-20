@@ -7,38 +7,39 @@ class Ticket_List_Model extends CI_Model {
     public function __construct() {
 
         $this->load->database ();
-        $this->load->library('session');
+        $this->load->library('cart');
 
     }
 
-    public function add_product(){
-        $newdata = array(
-                'username'  => 'johndoe',
-                'email'     => 'johndoe@some-site.com',
-                'logged_in' => TRUE
+    public function add_product($product_id = 0) {
+
+
+
+
+        $data = array(
+                'id'      => '42',
+                'qty'     => 3,
+                'price'   => 12.00,
+                'name'    => '1/4 Kg'
         );
 
-        $this->session->set_userdata($newdata);
-    }
+        $this->cart->insert($data);
 
-    public function get_products() {
 
-        $query = $this->db->get ( 'product' );
-        $result = $query->result_array ();
-
-        return $result;
+        //$this->cart->destroy();
 
     }
 
-    public function get_product_by_id($productId) {
-
-        $query = $this->db->get_where ( 'product', array (
-                'product_id' => $productId
-        ) );
-        $result = $query->row_array ();
-
-        return $result;
-
-    }
-
+    /*
+     * public function get_product_by_id($productId) {
+     *
+     * $query = $this->db->get_where ( 'product', array (
+     * 'product_id' => $productId
+     * ) );
+     * $result = $query->row_array ();
+     *
+     * return $result;
+     *
+     * }
+     */
 }

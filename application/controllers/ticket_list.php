@@ -16,9 +16,7 @@ class Ticket_List extends CI_Controller {
 
         $this->ticket_list_model->add_product ();
 
-
-
-        $this->load->view ( 'ticket_list_view' );
+        $this->load->view ( 'ticket_list_view');
 
     }
 

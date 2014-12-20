@@ -9,41 +9,33 @@
 	</thead>
 	<tbody>
 
-		<tr>
-			<td class="ticket-list-row">1 Kg</td>
+	<?php foreach ($this->cart->contents() as $items): ?>
+
+	    <tr>
+			<td class="ticket-list-row"><?php echo $items['name'];?></td>
 			<td class="ticket-list-row">
 
 				<form class="form-inline" role="form">
 					<div class="form-group">
 						<div class="input-group">
-
+                            <input type="hidden" id="product_id" value="<?php echo $items['id'];?>" />
 							<input type="text" class="form-control input-number text-center"
-								id="cant" placeholder="Cantidad" value="1" />
+								id="cant" placeholder="Cantidad" value="<?php echo $items['qty'];?>" />
 
 						</div>
 					</div>
 
 			</td>
-			<td class="text-right ticket-list-row">$80,00.-</td>
+			<td class="text-right ticket-list-row">$ <?php echo $this->cart->format_number($items['subtotal']); ?></td>
 		</tr>
 
-		<tr>
-			<td class="ticket-list-row">1/4 Kg</td>
-			<td class="ticket-list-row">
+	<?php endforeach ?>
 
-				<form class="form-inline" role="form">
-					<div class="form-group">
-						<div class="input-group">
-
-							<input type="text" class="form-control input-number text-center"
-								id="cant" placeholder="Cantidad" value="1" />
-
-						</div>
-					</div>
-
-			</td>
-			<td class="text-right ticket-list-row">$30,00.-</td>
-		</tr>
 	</tbody>
 
+
+
 </table>
+
+<!-- TODO: sacar de aca este estilo -->
+<h1 style="text-align: right;">Total: $ <?php echo $this->cart->format_number($this->cart->total()); ?></h1>
