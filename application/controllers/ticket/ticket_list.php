@@ -14,8 +14,6 @@ class Ticket_List extends CI_Controller {
 
     public function index() {
 
-        //$this->ticket_list_model->add_product ();
-
         $this->load->view ( 'ticket/ticket_list_view');
 
     }

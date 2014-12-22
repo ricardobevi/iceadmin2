@@ -11,13 +11,15 @@ class Ticket_List_Model extends CI_Model {
 
     }
 
-    public function add_product($product_id, $quantity = 1) {
+    public function add_product($product_id, $quantity) {
 
         $product_info = $this->obtain_product_info($product_id);
 
         if ( $product_info !== 0 ){
 
-            $product_info['qty'] = $quantity;
+            $current_qty = $this->obtain_current_quantity($product_id);
+
+            $product_info['qty'] = $current_qty + $quantity;
 
             $this->cart->insert($product_info);
 
@@ -30,6 +32,22 @@ class Ticket_List_Model extends CI_Model {
 
     public function del_product($product_id){
 
+
+        $rowid = $this->obtain_rowid($product_id);
+
+        $data = array(
+                'rowid' => $rowid,
+                'qty'   => 0
+        );
+
+        $this->cart->update($data);
+
+
+    }
+
+    private function obtain_rowid($product_id){
+        $rowid = -1;
+
         $i = 0;
         $cart_contents = $this->cart->contents();
 
@@ -40,17 +58,23 @@ class Ticket_List_Model extends CI_Model {
 
         if ( $cart_row['id'] == $product_id ) {
 
-            $row_id = $cart_row['rowid'];
-
-            $data = array(
-                    'rowid' => $row_id,
-                    'qty'   => 0
-            );
-
-            $this->cart->update($data);
+            $rowid = $cart_row['rowid'];
 
         }
 
+        return $rowid;
+    }
+
+    private function obtain_current_quantity($product_id){
+        $quantity = 0;
+
+        $rowid = $this->obtain_rowid($product_id);
+
+        if ( $rowid != -1 ){
+            $quantity = $this->cart->contents()[$rowid]['qty'];
+        }
+
+        return $quantity;
     }
 
     private function obtain_product_info( $product_id ){
@@ -72,10 +96,11 @@ class Ticket_List_Model extends CI_Model {
 
             $result = $query->result_array ();
 
-            if ( count($result) == 1 )
+            if ( count($result) == 1 ){
                 $result = $result[0];
-            else
+            } else {
                 $result = 0;
+            }
 
         }
 

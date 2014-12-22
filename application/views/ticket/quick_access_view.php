@@ -8,10 +8,16 @@
     		<?php if( ( $quickaccess_item['position'] % 3 ) == 0  ) echo '<div class="btn-group btn-group-lg" role="group">'; ?>
 
     		    <?php
-    		      if( $quickaccess_item['position'] != 9 )
-    		          echo '<button type="button" class="btn btn-default btn-block block" style="white-space: normal;">';
-    		      else
-    		          echo '<button type="button" class="btn btn-default btn-block block blockh2" style="white-space: normal;">';
+    		      $css_classes = "btn btn-default btn-block block quickaccess";
+
+    		      if( $quickaccess_item['position'] == 9 )
+    		          $css_classes = $css_classes . " blockh2";
+
+		          echo '<button type="button"
+                                class="'.$css_classes.'"
+                                style="white-space: normal;"
+                                productid="'.$quickaccess_item['product_id'].'">';
+
     		    ?>
 
     			     <?php echo $quickaccess_item['label'];?>
@@ -22,15 +28,6 @@
 
 		<?php endforeach ?>
 
-
-		<!--  div class="btn-group btn-group-lg" role="group">
-
-			<button type="button" class="btn btn-default btn-block block blockh2">1
-				Kg</button>
-			<button type="button" class="btn btn-default btn-block block">Vaso
-				$10</button>
-
-		</div -->
 
 	</div>
 

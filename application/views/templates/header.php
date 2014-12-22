@@ -33,6 +33,8 @@
 
     var ticketUrl = "<?php echo site_url('ticket/ticket');?>";
 
+    var ticketJSUrl = "<?php echo base_url("public/js/ticket.js");?>";
+
     var quickAccessUrl = "<?php echo site_url('ticket/quick_access');?>";
 
     var ticketListUrl = "<?php echo site_url('ticket/ticket_list');?>";
