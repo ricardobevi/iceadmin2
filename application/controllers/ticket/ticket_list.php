@@ -23,8 +23,18 @@ class Ticket_List extends CI_Controller {
         $this->load->view ( 'ticket/ticket_list_view');
     }
 
+    public function mod_product($product_id, $quantity, $add = FALSE){
+        $this->ticket_list_model->mod_product ($product_id, $quantity, $add );
+        $this->load->view ( 'ticket/ticket_list_view');
+    }
+
     public function del_product($product_id){
         $this->ticket_list_model->del_product ($product_id);
+        $this->load->view ( 'ticket/ticket_list_view');
+    }
+
+    public function close(){
+        $this->ticket_list_model->close ();
         $this->load->view ( 'ticket/ticket_list_view');
     }
 

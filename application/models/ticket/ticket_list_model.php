@@ -13,20 +13,54 @@ class Ticket_List_Model extends CI_Model {
 
     public function add_product($product_id, $quantity) {
 
+        $this->mod_product($product_id, $quantity, true);
+
+    }
+
+    public function mod_product($product_id, $quantity, $add = FALSE ) {
+
         $product_info = $this->obtain_product_info($product_id);
 
         if ( $product_info !== 0 ){
 
-            $current_qty = $this->obtain_current_quantity($product_id);
+            $total_qty = $quantity;
 
-            $product_info['qty'] = $current_qty + $quantity;
+            if ( $add !== FALSE ) {
 
-            $this->cart->insert($product_info);
+                $current_qty = $this->obtain_current_quantity($product_id);
+
+                $total_qty = $current_qty + $quantity;
+
+            }
+
+            if ( $total_qty > 0 ){
+
+                $rowid = $this->obtain_rowid($product_id);
+
+                if($rowid == -1){
+
+                    $product_info['qty'] = $total_qty;
+
+                    $product_info['options'] = array( 'price_id' => $product_info['price_id']);
+
+                    $this->cart->insert($product_info);
+
+                } else {
+
+                    $data = array(
+                            'rowid' => $rowid,
+                            'qty'   => $total_qty
+                    );
+
+                    $this->cart->update($data);
+
+                }
+
+            } else {
+                $this->del_product($product_id);
+            }
 
         }
-
-
-        //$this->cart->destroy();
 
     }
 
@@ -44,6 +78,42 @@ class Ticket_List_Model extends CI_Model {
 
 
     }
+
+
+    public function close(){
+
+        $ticket_items = $this->cart->contents();
+
+        if( count( $this->cart->contents() ) > 0 ){
+
+            $this->db->set('printed_number', 100);
+            $this->db->set('date_time', 'NOW()', FALSE);
+
+            $this->db->insert('ticket');
+
+            $ticket_id = $this->db->insert_id();
+
+            foreach ($ticket_items as $item) {
+                $this->db->set('product_id', $item['id']);
+                $this->db->set('ticket_id', $ticket_id);
+                $this->db->set('price_id', $item['options']['price_id']);
+                $this->db->set('quantity', $item['qty']);
+                $this->db->insert('product_ticket');
+            }
+
+            $this->cart->destroy();
+
+        }
+
+    }
+
+
+
+
+
+
+
+
 
     private function obtain_rowid($product_id){
         $rowid = -1;
@@ -85,7 +155,7 @@ class Ticket_List_Model extends CI_Model {
 
             $sql =
             "SELECT
-                P.id, P.label AS name, PR.price
+                P.id, P.label AS name, PR.price, PR.id as price_id
             FROM
                 `product` P
                 JOIN `product_price` PP ON P.id = PP.product_id

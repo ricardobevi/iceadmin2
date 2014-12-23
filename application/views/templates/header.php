@@ -29,7 +29,7 @@
 
     <script type="text/JavaScript">
 
-    var _DEBUG = true;
+    var _DEBUG = false;
 
     var ticketUrl = "<?php echo site_url('ticket/ticket');?>";
 
@@ -60,11 +60,12 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">Ice Admin 2</a>
+				<a class="navbar-brand" href="<?php echo site_url('ticket');?>">Ice Admin 2</a>
 			</div>
 			<div id="navbar" class="collapse navbar-collapse">
 				<ul class="nav navbar-nav">
-					<li class="active"><a href="#">Facturación</a></li>
+					<li id="ticket" class="active"><a href="<?php echo site_url('ticket');?>">Facturación</a></li>
+					<li id="report" class="inactive"><a href="<?php echo site_url('report');?>">Reportes</a></li>
 				</ul>
 			</div>
 			<!--/.nav-collapse -->

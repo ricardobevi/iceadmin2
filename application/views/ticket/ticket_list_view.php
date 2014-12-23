@@ -18,9 +18,8 @@
 				<form class="form-inline" role="form">
 					<div class="form-group">
 						<div class="input-group">
-                            <input type="hidden" id="product_id" value="<?php echo $items['id'];?>" />
-							<input type="text" class="form-control input-number text-center"
-								id="cant" placeholder="Cantidad" value="<?php echo $items['qty'];?>" />
+							<input type="text" class="form-control input-number text-center ticket_list_qty"
+								id="cant" placeholder="Cantidad" value="<?php echo $items['qty'];?>" productid="<?php echo $items['id'];?>" />
 
 						</div>
 					</div>
