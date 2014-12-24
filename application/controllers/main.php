@@ -14,8 +14,6 @@ class Main extends CI_Controller {
 
         $this->load->view ( 'templates/header' );
 
-        $this->load->view ( 'ticket/ticket_view' );
-
         $this->load->view ( 'templates/footer' );
 
     }

@@ -33,6 +33,8 @@
 
     var ticketUrl = "<?php echo site_url('ticket/ticket');?>";
 
+    var reportUrl = "<?php echo site_url('report/report');?>";
+
     var ticketJSUrl = "<?php echo base_url("public/js/ticket.js");?>";
 
     var quickAccessUrl = "<?php echo site_url('ticket/quick_access');?>";
@@ -44,7 +46,6 @@
     <script	src="<?php echo base_url("public/js/vendor/jquery.min.js");?>"></script>
 
     <script type="text/JavaScript" src="<?php echo base_url("public/js/main.js");?>"></script>
-
 
 </head>
 
@@ -64,8 +65,8 @@
 			</div>
 			<div id="navbar" class="collapse navbar-collapse">
 				<ul class="nav navbar-nav">
-					<li id="ticket" class="active"><a href="<?php echo site_url('ticket');?>">Facturación</a></li>
-					<li id="report" class="inactive"><a href="<?php echo site_url('report');?>">Reportes</a></li>
+					<li id="ticket" class="active"><a href="#">Facturación</a></li>
+					<li id="report" class="inactive"><a href="#">Reportes</a></li>
 				</ul>
 			</div>
 			<!--/.nav-collapse -->

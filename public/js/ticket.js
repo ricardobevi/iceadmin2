@@ -1,4 +1,9 @@
 
+$('#container').ready(function(){
+	$("#quick_access").load( quickAccessUrl );
+	$("#ticket_list").load( ticketListUrl );
+});
+
 function add_product(productId, quantity){
 	$("#ticket_list").load( ticketListUrl + "/add_product/" + productId + "/" + quantity );
 }
