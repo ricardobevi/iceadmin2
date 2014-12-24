@@ -17,18 +17,66 @@ function close_ticket(){
 	$("#ticket_list").load( ticketListUrl + "/close" );
 }
 
+/***************************************************************************
+* Prototype function for printing raw ESC/POS commands
+* Usage:
+*    qz.append('\n\n\nHello world!\n');
+*    qz.print();
+***************************************************************************/
+function printESCP() {
+    
+    
+    // Append a png in ESCP format with single pixel density
+    //qz.appendImage(getPath() + "img/image_sample_bw2.png", "ESCP", "double");
+    
+    //qz.appendImage(getPath() + "img/image_sample_bw2.png", "ESCP", "simple");
+    
+    // Automatically gets called when "qz.appendImage()" is finished.
+    window["qzDoneAppending"] = function() {
+    
+        qz.appendHex("x1Bx40");
+    
+        qz.appendHex("x48x6Fx6Cx61");
+        qz.appendHex("x0Dx0A");
+        
+        qz.appendHex("x1Bx21x00");
+        qz.appendHex("x1Bx21x30"); 
+        qz.appendHex("x48x6Fx6Cx61");
+        qz.appendHex("x0Dx0A");
+        qz.appendHex("x0Dx0A");
+        qz.appendHex("x0Dx0A");
+        qz.appendHex("x0Dx0A");
+        qz.appendHex("x0Dx0A");
+        qz.appendHex("x0Dx0A");
+    
+        // Tell the apple to print.
+        qz.print();
+            
+        // Remove any reference to this function
+        window['qzDoneAppending'] = null;
+    };
+    
+
+}
+
 function print_ticket(){
+	
+	if (notReady()) { return; }
 
 	$.getJSON( ticketListUrl + "/json_print", function( data ) {
 		var items = [];
 		$.each( data, function( key, val ) {
-		items.push( "<li>" + val.name + " " + val.qty + " " + val.subtotal + "</li>" );
+			items.push( "<li>" + val.name + " " + val.qty + " " + val.subtotal + "</li>" );
 		});
+		
 		$( "<ul/>", {
 		"class": "my-new-list",
 		html: items.join( "" )
 		}).appendTo( "body" );
-		});
+		
+		printESCP();
+		
+	});
 	
 }
 

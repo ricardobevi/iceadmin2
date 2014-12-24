@@ -41,7 +41,13 @@
 
     var ticketListUrl = "<?php echo site_url('ticket/ticket_list');?>";
 
+    var qzPrintAppletLocation = "<?php echo base_url('public/applet/qz-print.jar');?>";
+    var qzPrintAppletJNLPLocation = "<?php echo base_url('public/applet/qz-print_jnlp.jnlp');?>";
+
     </script>
+
+    <script type="text/javascript" src="<?php echo base_url("public/js/vendor/qz-deploy.js");?>"></script>
+    <script type="text/javascript" src="<?php echo base_url("public/js/vendor/qz-print.js");?>"></script>
 
     <script	src="<?php echo base_url("public/js/vendor/jquery.min.js");?>"></script>
 
