@@ -17,6 +17,21 @@ function close_ticket(){
 	$("#ticket_list").load( ticketListUrl + "/close" );
 }
 
+function print_ticket(){
+
+	$.getJSON( ticketListUrl + "/json_print", function( data ) {
+		var items = [];
+		$.each( data, function( key, val ) {
+		items.push( "<li>" + val.name + " " + val.qty + " " + val.subtotal + "</li>" );
+		});
+		$( "<ul/>", {
+		"class": "my-new-list",
+		html: items.join( "" )
+		}).appendTo( "body" );
+		});
+	
+}
+
 var down = {};
 down['ctrl'] = 1;
 
@@ -33,7 +48,10 @@ $(document).keydown(function(event) {
 	
     if (event.ctrlKey && event.which == 13 && down['ctrl'] != null) {
     	down['ctrl'] = null;
+    	
+    	print_ticket();
     	close_ticket();
+    	
     	if ( _DEBUG ) $("#debug").text( $("#debug").text() + " cierre_ticket" );
     }
 	

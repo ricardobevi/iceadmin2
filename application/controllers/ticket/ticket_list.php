@@ -33,6 +33,12 @@ class Ticket_List extends CI_Controller {
         $this->load->view ( 'ticket/ticket_list_view');
     }
 
+    public function json_print(){
+        $ticket_data['ticket_data'] = $this->ticket_list_model->get_ticket_data ();
+        $this->load->view ( 'ticket/ticket_json_view', $ticket_data);
+    }
+
+
     public function close(){
         $this->ticket_list_model->close ();
         $this->load->view ( 'ticket/ticket_list_view');

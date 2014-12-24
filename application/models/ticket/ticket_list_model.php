@@ -80,6 +80,10 @@ class Ticket_List_Model extends CI_Model {
     }
 
 
+    public function get_ticket_data(){
+        return $this->cart->contents();
+    }
+
     public function close(){
 
         $ticket_items = $this->cart->contents();
@@ -106,8 +110,6 @@ class Ticket_List_Model extends CI_Model {
         }
 
     }
-
-
 
 
 
