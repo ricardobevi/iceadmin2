@@ -89,7 +89,8 @@ $(document).keydown(function(event) {
 	
 	switch(event.keyCode){
 		case 17:
-			$("#quick_access").load( quickAccessUrl + "/group/2" );
+			$("#quick_access_group_1").addClass("collapse");
+			$("#quick_access_group_2").removeClass("collapse");
 			break;	
 	}
 	
@@ -110,7 +111,8 @@ $(document).keyup(function(event) {
 	//if ( _DEBUG ) $("#debug").text( "" );
 	switch(event.keyCode){
 		case 17:
-			$("#quick_access").load( quickAccessUrl );
+			$("#quick_access_group_2").addClass("collapse");
+			$("#quick_access_group_1").removeClass("collapse");
 			down['ctrl'] = 1;
 			break;
 	}

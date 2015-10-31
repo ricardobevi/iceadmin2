@@ -1,5 +1,13 @@
+<?php if( $hidden == false): ?>
 
-<div class="panel panel-default">
+<div id="quick_access_group_<?php echo $group; ?>" class="panel panel-default">
+
+<?php else: ?>
+
+<div id="quick_access_group_<?php echo $group; ?>" class="panel panel-default collapse">
+
+<?php endif; ?>
+
 
 	<div class="panel-body text-center">
 
@@ -35,4 +43,5 @@
 
 </div>
 
+<?php if ( isset($hidden_view) ) echo $hidden_view;?>
 
