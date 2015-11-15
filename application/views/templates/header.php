@@ -29,20 +29,22 @@
 
     <script type="text/JavaScript">
 
-    var _DEBUG = false;
-
-    var ticketUrl = "<?php echo site_url('ticket/ticket');?>";
-
-    var reportUrl = "<?php echo site_url('report/report');?>";
-
-    var ticketJSUrl = "<?php echo base_url("public/js/ticket.js");?>";
-
-    var quickAccessUrl = "<?php echo site_url('ticket/quick_access');?>";
-
-    var ticketListUrl = "<?php echo site_url('ticket/ticket_list');?>";
-
-    var qzPrintAppletLocation = "<?php echo base_url('public/applet/qz-print.jar');?>";
-    var qzPrintAppletJNLPLocation = "<?php echo base_url('public/applet/qz-print_jnlp.jnlp');?>";
+	    var _DEBUG = false;
+	
+	    var ticketUrl = "<?php echo site_url('ticket/ticket');?>";
+	
+	    var reportUrl = "<?php echo site_url('report/report');?>";
+	
+	    var ticketJSUrl = "<?php echo base_url("public/js/ticket.js");?>";
+	
+	    var quickAccessUrl = "<?php echo site_url('ticket/quick_access');?>";
+	
+	    var ticketListUrl = "<?php echo site_url('ticket/ticket_list');?>";
+	
+	    var qzPrintAppletLocation = "<?php echo base_url('public/applet/qz-print.jar');?>";
+	    var qzPrintAppletJNLPLocation = "<?php echo base_url('public/applet/qz-print_jnlp.jnlp');?>";
+	
+	    var publicImgDir = "<?php echo base_url('public/img');?>";
 
     </script>
 
@@ -52,6 +54,7 @@
     <script	src="<?php echo base_url("public/js/vendor/jquery.min.js");?>"></script>
 
     <script type="text/JavaScript" src="<?php echo base_url("public/js/main.js");?>"></script>
+    <script type="text/JavaScript" src="<?php echo base_url("public/js/ticket.js");?>"></script>
 
 </head>
 

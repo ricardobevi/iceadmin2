@@ -10,7 +10,7 @@ function add_product(productId, quantity){
 
 
 function mod_product(productId, quantity){
-	$("#ticket_list").load( ticketListUrl + "/mod_product/" + productId + "/" + quantity  );
+	$("#ticket_list").load( ticketListUrl + "/mod_product/" + productId + "/" + quantity );
 }
 
 function close_ticket(){
@@ -28,20 +28,23 @@ function printESCP() {
     
     // Append a png in ESCP format with single pixel density
     //qz.appendImage(getPath() + "img/image_sample_bw2.png", "ESCP", "double");
-    
-    //qz.appendImage(getPath() + "img/image_sample_bw2.png", "ESCP", "simple");
+
+    qz.appendImage(publicImgDir + "/image_sample_bw2.png", "ESCP", "simple");
     
     // Automatically gets called when "qz.appendImage()" is finished.
     window["qzDoneAppending"] = function() {
     
         qz.appendHex("x1Bx40");
     
-        qz.appendHex("x48x6Fx6Cx61");
+        //qz.appendHex("x48x6Fx6Cx61");
+        qz.append("lala " + '\xA4');                
+        
         qz.appendHex("x0Dx0A");
         
         qz.appendHex("x1Bx21x00");
         qz.appendHex("x1Bx21x30"); 
-        qz.appendHex("x48x6Fx6Cx61");
+        //qz.appendHex("x48x6Fx6Cx61");
+        qz.append("lala ñandüú");
         qz.appendHex("x0Dx0A");
         qz.appendHex("x0Dx0A");
         qz.appendHex("x0Dx0A");

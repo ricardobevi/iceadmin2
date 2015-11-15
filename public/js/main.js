@@ -1,6 +1,5 @@
 $(document).ready(function(){
-	$("#container").load( ticketUrl );
-	$.getScript(ticketJSUrl);
+	//$("#container").load( ticketUrl );
 });
 
 

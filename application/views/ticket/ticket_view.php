@@ -11,5 +11,3 @@
     </div>
 
 </div>
-
-<script type="text/JavaScript" src="<?php echo base_url("public/js/ticket.js");?>"></script>
