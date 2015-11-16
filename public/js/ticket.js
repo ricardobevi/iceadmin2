@@ -37,14 +37,16 @@ function printESCP() {
         qz.appendHex("x1Bx40");
     
         //qz.appendHex("x48x6Fx6Cx61");
-        qz.append("lala " + '\xA4');                
+        qz.append("lala ");
+
+        qz.appendHex("xA4");
         
         qz.appendHex("x0Dx0A");
         
         qz.appendHex("x1Bx21x00");
         qz.appendHex("x1Bx21x30"); 
         //qz.appendHex("x48x6Fx6Cx61");
-        qz.append("lala ñandüú");
+        qz.append("lala" + '\xA4');
         qz.appendHex("x0Dx0A");
         qz.appendHex("x0Dx0A");
         qz.appendHex("x0Dx0A");
@@ -67,7 +69,8 @@ function print_ticket(){
 	if (notReady()) { return; }
 
 	$.getJSON( ticketListUrl + "/json_print", function( data ) {
-		var items = [];
+/*		var items = [];
+
 		$.each( data, function( key, val ) {
 			items.push( "<li>" + val.name + " " + val.qty + " " + val.subtotal + "</li>" );
 		});
@@ -75,7 +78,7 @@ function print_ticket(){
 		$( "<ul/>", {
 		"class": "my-new-list",
 		html: items.join( "" )
-		}).appendTo( "body" );
+		}).appendTo( "body" ); */
 		
 		printESCP();
 		
@@ -84,41 +87,47 @@ function print_ticket(){
 }
 
 var down = {};
-down['ctrl'] = 1;
+down['ctrl'] = 0;
 
 $(document).keydown(function(event) {
+
+    if ( _DEBUG ) $("#debug").text( "DOWN " + event.keyCode );
 	
-	//if ( _DEBUG ) $("#debug").text( event.keyCode );
+    switch( event.keyCode ){
+        case 17:
+            $("#quick_access_group_1").addClass("collapse");
+            $("#quick_access_group_2").removeClass("collapse");
+            break;
+
+
+    }
 	
-	switch(event.keyCode){
-		case 17:
-			$("#quick_access_group_1").addClass("collapse");
-			$("#quick_access_group_2").removeClass("collapse");
-			break;	
-	}
 	
-	
-    if (event.ctrlKey && event.which == 13 && down['ctrl'] != null) {
-    	down['ctrl'] = null;
+    if ( event.ctrlKey ) {
+
+        switch(event.which){
+            case 13:
+                print_ticket();
+                close_ticket();
+                break;
+        }
     	
-    	print_ticket();
-    	close_ticket();
-    	
-    	if ( _DEBUG ) $("#debug").text( $("#debug").text() + " cierre_ticket" );
     }
 	
 });
 
 
 $(document).keyup(function(event) {
-	//if ( _DEBUG ) $("#debug").text( "" );
-	switch(event.keyCode){
+
+	if ( _DEBUG ) $("#debug").text( "UP " + event.keyCode );
+	
+    switch(event.keyCode){
 		case 17:
 			$("#quick_access_group_2").addClass("collapse");
 			$("#quick_access_group_1").removeClass("collapse");
-			down['ctrl'] = 1;
 			break;
 	}
+
 });
 
 

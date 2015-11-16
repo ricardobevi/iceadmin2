@@ -29,7 +29,7 @@
 
     <script type="text/JavaScript">
 
-	    var _DEBUG = false;
+	    var _DEBUG = true;
 	
 	    var ticketUrl = "<?php echo site_url('ticket/ticket');?>";
 	
