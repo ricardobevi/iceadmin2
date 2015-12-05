@@ -1,7 +1,6 @@
 <?php $this->load->helper('url');?>
 
 </div>
-</div>
 <!-- /.container -->
 
 <div id="debug"></div>

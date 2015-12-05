@@ -40,11 +40,13 @@
 	    var quickAccessUrl = "<?php echo site_url('ticket/quick_access');?>";
 	
 	    var ticketListUrl = "<?php echo site_url('ticket/ticket_list');?>";
+
+	    var ticketNumberImgUrl = "<?php echo site_url('ticket/ticket_number');?>";
 	
 	    var qzPrintAppletLocation = "<?php echo base_url('public/applet/qz-print.jar');?>";
 	    var qzPrintAppletJNLPLocation = "<?php echo base_url('public/applet/qz-print_jnlp.jnlp');?>";
 	
-	    var publicImgDir = "<?php echo base_url('public/img');?>";
+	    
 
     </script>
 

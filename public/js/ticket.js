@@ -1,3 +1,16 @@
+// TODO: mandar a un util.js
+String.prototype.hexEncode = function(){
+    var hex, i;
+
+    var result = "";
+    for (i=0; i<this.length; i++) {
+        hex = this.charCodeAt(i).toString(16);
+        result += ("x"+hex).slice(-4);
+    }
+
+    return result
+}
+
 
 $('#container').ready(function(){
 	$("#quick_access").load( quickAccessUrl );
@@ -17,26 +30,20 @@ function close_ticket(){
 	$("#ticket_list").load( ticketListUrl + "/close" );
 }
 
-/***************************************************************************
-* Prototype function for printing raw ESC/POS commands
-* Usage:
-*    qz.append('\n\n\nHello world!\n');
-*    qz.print();
-***************************************************************************/
+
 function printESCP() {
-    
-    
+        
     // Append a png in ESCP format with single pixel density
     //qz.appendImage(getPath() + "img/image_sample_bw2.png", "ESCP", "double");
 
-    qz.appendImage(publicImgDir + "/image_sample_bw2.png", "ESCP", "simple");
+    qz.appendImage(ticketNumberImgUrl, "ESCP", "simple");
     
     // Automatically gets called when "qz.appendImage()" is finished.
     window["qzDoneAppending"] = function() {
+
     
         qz.appendHex("x1Bx40");
-    
-        //qz.appendHex("x48x6Fx6Cx61");
+
         qz.append("lala ");
 
         qz.appendHex("xA4");
@@ -64,21 +71,24 @@ function printESCP() {
 
 }
 
+function print_header( number ){}
+
+function print_body( items ){}
+
+function print_footer(){}
+
+
 function print_ticket(){
 	
 	if (notReady()) { return; }
 
 	$.getJSON( ticketListUrl + "/json_print", function( data ) {
-/*		var items = [];
+		var items = [];
 
 		$.each( data, function( key, val ) {
 			items.push( "<li>" + val.name + " " + val.qty + " " + val.subtotal + "</li>" );
 		});
 		
-		$( "<ul/>", {
-		"class": "my-new-list",
-		html: items.join( "" )
-		}).appendTo( "body" ); */
 		
 		printESCP();
 		
