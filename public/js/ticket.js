@@ -36,7 +36,7 @@ function printESCP() {
     // Append a png in ESCP format with single pixel density
     //qz.appendImage(getPath() + "img/image_sample_bw2.png", "ESCP", "double");
 
-    qz.appendImage(ticketNumberImgUrl, "ESCP", "simple");
+    qz.appendImage(ticketNumberImgUrl + "/print_number/" + 999, "ESCP", "simple");
     
     // Automatically gets called when "qz.appendImage()" is finished.
     window["qzDoneAppending"] = function() {

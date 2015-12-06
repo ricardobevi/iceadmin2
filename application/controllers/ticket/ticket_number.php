@@ -13,33 +13,41 @@ class Ticket_Number extends CI_Controller {
 
 	}
 
-	public function index() {
+	public function index($number) {
 
-		$my_img = imagecreate( 160, 90 );
-		$background = imagecolorallocate( $my_img, 255, 255, 255 );
-		$text_colour = imagecolorallocate( $my_img, 0, 0, 0 );
-		
-		//imagestring( $my_img, 1, 0, 0, "lala", $text_colour );
-		
-		$font = "public/fonts/targa.ttf";
-		
-		imagettftext($my_img, 
-					 84, // size 
-				     0, 
-				     15, // X
-				     90, // Y
-				     $text_colour, 
-				     $font, 
-				     "987");
-		
-		
-		header( "Content-type: image/png" );
-		imagepng( $my_img );
-		imagecolordeallocate( $text_color );
-		imagecolordeallocate( $background );
-		imagedestroy( $my_img );
 		
 	}
+	
+	public function print_number($number){
+
+		$number_img = imagecreate( 160, 65 );
+		$background = imagecolorallocate( $number_img, 255, 255, 255 );
+		$text_colour = imagecolorallocate( $number_img, 0, 0, 0 );
+		
+		$font = "public/fonts/DejaVuSansMono-Bold.ttf";
+		
+		
+		imagettftext($number_img,
+				65, // size
+				0,
+				10, // X
+				64, // Y
+				$text_colour,
+				$font,
+				$number);
+		
+		$number_img = imagescale($number_img, 160, 90,  IMG_BICUBIC_FIXED);
+		
+		header( "Content-type: image/png" );
+		
+		imagepng( $number_img );
+		imagecolordeallocate( $text_color );
+		imagecolordeallocate( $background );
+		imagedestroy( $number_img );
+				
+	}
+	
+	
 
 
 
