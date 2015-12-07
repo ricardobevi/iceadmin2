@@ -1,9 +1,92 @@
 // TODO: mandar a un util.js
+var _LINECHARS = 32;
+var _LINEBIGCHARS = 20;
 
+function obtainTicketNumber(){
+		
+	var ticketNumber = Cookies.get("ticket_number");
+	
+	if ( ticketNumber != undefined ) {
+			
+		ticketNumber = parseInt(ticketNumber) + 1;
+		
+		if ( ticketNumber > 999 ) ticketNumber = 0;
+		
+		Cookies.set("ticket_number", ticketNumber, { expires: 7 });
+		
+	} else {
+		
+		Cookies.set("ticket_number", 1, { expires: 7 });
+		
+	}
+	
+	return ticketNumber;
+	
+}
 
 function formatCurrency(number){
 	var ret = "$" + $.number( number , 2, ',' );
 	return ret;
+}
+
+function createLine(character = "_"){
+	var line = repeatText(character, _LINECHARS) + "\n";
+	return line;
+}
+
+function repeatText(text, times){
+	var repeatedText = "";
+	
+	for ( i = 0 ; i < times ; i++ ){
+		repeatedText = repeatedText + text;
+	}
+	
+	return repeatedText;
+}
+
+function underlineText( text, mustCenter = true, underlineChar = "*" ) {
+	var underlinedText = "";
+	
+	if ( mustCenter == true ){
+		underlinedText = centerText( text + "\n" );
+		underlinedText = underlinedText + centerText( repeatText(underlineChar, text.length) );
+	} else {
+		underlinedText = text + "\n";
+		underlinedText = underlinedText + repeatText(underlineChar, text.length);
+	}
+	
+	
+	return underlinedText;
+}
+
+function centerText(text) {
+	var centered = "";
+	
+	var charsToCenter = (_LINECHARS / 2) - (text.length / 2);
+	
+	centered = repeatText(" ", charsToCenter) + text;
+	
+	return centered;
+}
+
+function centerBigText(text) {
+	var centered = "";
+	
+	var charsToCenter = (_LINEBIGCHARS / 2) - (text.length / 2);
+	
+	centered = repeatText(" ", charsToCenter) + text;
+	
+	return centered;
+}
+
+function rightText(text) {
+	var right = "";
+	
+	var charsToRight = _LINECHARS - text.length;
+	
+	right = repeatText(" ", charsToRight) + text;
+	
+	return right;
 }
 
 
@@ -26,90 +109,84 @@ function close_ticket(){
 }
 
 
-function printESCP(ticketNumber) {
-        
-    // Append a png in ESCP format with single pixel density
-    //qz.appendImage(getPath() + "img/image_sample_bw2.png", "ESCP", "double");
-
-    qz.appendImage(ticketNumberImgUrl + "/print_number/" + ticketNumber, "ESCP", "simple");
-    
-    // Automatically gets called when "qz.appendImage()" is finished.
-    window["qzDoneAppending"] = function() {
-
-    
-        qz.appendHex("x1Bx40");
-
-        qz.append("lala ");
-
-        qz.appendHex("xA4");
-        
-        qz.appendHex("x0Dx0A");
-        
-        qz.appendHex("x1Bx21x00");
-        qz.appendHex("x1Bx21x30"); 
-        //qz.appendHex("x48x6Fx6Cx61");
-        qz.append("lala" + '\xA4');
-        qz.appendHex("x0Dx0A");
-        qz.appendHex("x0Dx0A");
-        qz.appendHex("x0Dx0A");
-        qz.appendHex("x0Dx0A");
-        qz.appendHex("x0Dx0A");
-        qz.appendHex("x0Dx0A");
-    
-        // Tell the apple to print.
-        qz.print();
-            
-        // Remove any reference to this function
-        window['qzDoneAppending'] = null;
-    };
-    
-
+function print_number( ticketNumber ){
+	
+    var s = "000" + ticketNumber;
+    ticketNumberString = s.substr( s.length - 3 );
+		
+	qz.appendImage(ticketNumberImgUrl + "/print_number/" + ticketNumberString, "ESCP", "simple");
+	
 }
 
-function print_header( ticketNumber ){
+
+function print_header(ticketNumber){
+	qz.appendHex("x1Bx40"); // start printer
 	
-    qz.appendImage(ticketNumberImgUrl + "/print_number/" + ticketNumber, "ESCP", "simple");
-	
+    qz.append( centerText( underlineText("Heladeria Los Amores") ) + "\n");
+    
+    qz.append(centerText("Brown 67, Mar de Ajo\n"));
+    
+    qz.append(createLine());
+    
+    qz.append(centerText("Sera llamado por el numero: \n"));
+    
+    print_number( ticketNumber );
+    
+    qz.appendHex("x0Dx0A"); //newline
+    
+}
+
+function print_wifi(){
+	 qz.append(createLine());
+	 qz.append(centerText("Clave del WiFi: amores2039\n"));
+	 qz.append(createLine());
 }
 
 function print_body( items, total ){
 	
 	total = formatCurrency(total);
+
+	qz.append("Cnt Descripcion           SubTot");
+	qz.append(createLine());
 	
-    qz.appendHex("x1Bx40"); // start printer
-    
     for ( i = 0 ; i < items.length ; i++ ) {
     	var item = items[i];
+    	/*
+    	var itemLine = "";
+    	var subtotal = "";
     	
-    	qz.append(item.qty + " " + item.name + " " + formatCurrency( item.subtotal ) );
+    	itemLine = item.qty + " " + item.name;
+    	subtotal = formatCurrency( item.subtotal );
+    	
+    	itemLine = itemLine + repeatText(".", _LINECHARS - (itemLine.length + subtotal.length) );
+    	itemLine = itemLine + subtotal;
+    	
+    	qz.append( itemLine + "");*/
+    	
+    	qz.append( item.qty + " " + item.name);
     	qz.appendHex("x0Dx0A"); //newline
     }
-        
-    // change text size
-    /*
-    qz.appendHex("x1Bx21x00");
-    qz.appendHex("x1Bx21x30");
-      */  
+   
+    qz.appendHex("x1Bx21x30"); // change text size
     
-    qz.append("lala");
+    qz.append(rightText("Total: " + total));
     qz.appendHex("x0Dx0A"); //newline
     
-    qz.appendHex("x1Bx21x30");
+    qz.appendHex("x1Bx21x00"); // change text size
     
-    qz.append("Total: " + total);
-    qz.appendHex("x0Dx0A"); //newline
-    
-    qz.appendHex("x1Bx21x00");
-    
-    qz.append("Total: " + total);
-    
-    
-    qz.append("\n1234567890123456789012345678901234567890");
+    qz.append(createLine());
 	
 }
 
 function print_footer(){
 	
+	qz.appendHex("x1Bx21x31"); // change text size
+	
+	qz.append(centerBigText("COMPROBANTE\n"));
+	
+	qz.appendHex("x1Bx21x00"); // change text size
+	
+	qz.append(centerText("NO VALIDO COMO FACTURA\n"));
 	
 	qz.appendHex("x0Dx0Ax0Dx0Ax0Dx0Ax0Dx0Ax0Dx0Ax0Dx0A");
 }
@@ -138,19 +215,15 @@ function print_ticket(){
 			}
 			
 		});
-		
-		
-		Cookies.set("ticket_number", "001", { expires: 7 });
-		
-		var ticketNumber = Cookies.get("ticket_number");
-		
-		print_header(ticketNumber);
-		
-		window["qzDoneAppending"] = function() {
+				
+		print_header( obtainTicketNumber() );
 			
+		window["qzDoneAppending"] = function() {
+						
+			print_wifi();
 			print_body( items, total );
 			print_footer();
-			
+
 		    // Tell the apple to print.
 		    qz.print();
 		    
