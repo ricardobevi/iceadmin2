@@ -1,14 +1,9 @@
 // TODO: mandar a un util.js
-String.prototype.hexEncode = function(){
-    var hex, i;
 
-    var result = "";
-    for (i=0; i<this.length; i++) {
-        hex = this.charCodeAt(i).toString(16);
-        result += ("x"+hex).slice(-4);
-    }
 
-    return result
+function formatCurrency(number){
+	var ret = "$" + $.number( number , 2, ',' );
+	return ret;
 }
 
 
@@ -31,12 +26,12 @@ function close_ticket(){
 }
 
 
-function printESCP() {
+function printESCP(ticketNumber) {
         
     // Append a png in ESCP format with single pixel density
     //qz.appendImage(getPath() + "img/image_sample_bw2.png", "ESCP", "double");
 
-    qz.appendImage(ticketNumberImgUrl + "/print_number/" + 999, "ESCP", "simple");
+    qz.appendImage(ticketNumberImgUrl + "/print_number/" + ticketNumber, "ESCP", "simple");
     
     // Automatically gets called when "qz.appendImage()" is finished.
     window["qzDoneAppending"] = function() {
@@ -71,27 +66,98 @@ function printESCP() {
 
 }
 
-function print_header( number ){}
+function print_header( ticketNumber ){
+	
+    qz.appendImage(ticketNumberImgUrl + "/print_number/" + ticketNumber, "ESCP", "simple");
+	
+}
 
-function print_body( items ){}
+function print_body( items, total ){
+	
+	total = formatCurrency(total);
+	
+    qz.appendHex("x1Bx40"); // start printer
+    
+    for ( i = 0 ; i < items.length ; i++ ) {
+    	var item = items[i];
+    	
+    	qz.append(item.qty + " " + item.name + " " + formatCurrency( item.subtotal ) );
+    	qz.appendHex("x0Dx0A"); //newline
+    }
+        
+    // change text size
+    /*
+    qz.appendHex("x1Bx21x00");
+    qz.appendHex("x1Bx21x30");
+      */  
+    
+    qz.append("lala");
+    qz.appendHex("x0Dx0A"); //newline
+    
+    qz.appendHex("x1Bx21x30");
+    
+    qz.append("Total: " + total);
+    qz.appendHex("x0Dx0A"); //newline
+    
+    qz.appendHex("x1Bx21x00");
+    
+    qz.append("Total: " + total);
+    
+    
+    qz.append("\n1234567890123456789012345678901234567890");
+	
+}
 
-function print_footer(){}
+function print_footer(){
+	
+	
+	qz.appendHex("x0Dx0Ax0Dx0Ax0Dx0Ax0Dx0Ax0Dx0Ax0Dx0A");
+}
 
 
 function print_ticket(){
 	
 	if (notReady()) { return; }
+	
 
 	$.getJSON( ticketListUrl + "/json_print", function( data ) {
 		var items = [];
+		var total = 0;
 
 		$.each( data, function( key, val ) {
-			items.push( "<li>" + val.name + " " + val.qty + " " + val.subtotal + "</li>" );
+			//items.push( "<li>" + val.name + " " + val.qty + " " + val.subtotal + "</li>" );
+			
+			if ( key == "list" ){
+				
+				$.each( val, function( key, value ) {
+					items.push( value );
+				});
+				
+			} else if ( key == "total" ) {
+				total = val;
+			}
+			
 		});
 		
 		
-		printESCP();
+		Cookies.set("ticket_number", "001", { expires: 7 });
 		
+		var ticketNumber = Cookies.get("ticket_number");
+		
+		print_header(ticketNumber);
+		
+		window["qzDoneAppending"] = function() {
+			
+			print_body( items, total );
+			print_footer();
+			
+		    // Tell the apple to print.
+		    qz.print();
+		    
+		    // Remove any reference to this function
+		    window['qzDoneAppending'] = null;
+		};
+
 	});
 	
 }

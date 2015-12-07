@@ -31,7 +31,7 @@ function deployQZ() {
 */
 function qzReady() {
     // Setup our global qz object
-    alert('applet loaded');
+    //alert('applet loaded');
 }
 
 /**
@@ -130,9 +130,10 @@ function findPrinter(name) {
             var printer = qz.getPrinter();
             
             // Alert the printer name to user
+            /*
             alert(printer !== null ? 'Printer found: "' + printer + 
                 '" after searching for "' + name + '"' : 'Printer "' + 
-                 name + '" not found.');
+                 name + '" not found.');*/
             
             // Remove reference to this function
             window['qzDoneFinding'] = null;

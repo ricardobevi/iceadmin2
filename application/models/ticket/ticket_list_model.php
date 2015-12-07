@@ -81,7 +81,13 @@ class Ticket_List_Model extends CI_Model {
 
 
     public function get_ticket_data(){
-        return $this->cart->contents();
+    	
+    	$data = array(
+    			'list' => $this->cart->contents(),
+    			'total'   => $this->cart->total()
+    	);
+    	 
+        return $data;
     }
 
     public function close(){
