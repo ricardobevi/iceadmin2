@@ -37,7 +37,7 @@ function createLine(character = "_"){
 function repeatText(text, times){
 	var repeatedText = "";
 	
-	for ( i = 0 ; i < times ; i++ ){
+	for ( repeat = 0 ; repeat < times ; repeat++ ){
 		repeatedText = repeatedText + text;
 	}
 	
@@ -149,22 +149,20 @@ function print_body( items, total ){
 	qz.append("Cnt Descripcion           SubTot");
 	qz.append(createLine());
 	
-    for ( i = 0 ; i < items.length ; i++ ) {
-    	var item = items[i];
-    	/*
-    	var itemLine = "";
-    	var subtotal = "";
+	var itemLine = "";
+	var subtotal = "";
+	
+    for ( itemNum = 0 ; itemNum < items.length ; itemNum++ ) {
+    	var item = items[itemNum];
     	
     	itemLine = item.qty + " " + item.name;
     	subtotal = formatCurrency( item.subtotal );
-    	
+
     	itemLine = itemLine + repeatText(".", _LINECHARS - (itemLine.length + subtotal.length) );
+    	
     	itemLine = itemLine + subtotal;
     	
-    	qz.append( itemLine + "");*/
-    	
-    	qz.append( item.qty + " " + item.name);
-    	qz.appendHex("x0Dx0A"); //newline
+    	qz.append( itemLine + "\n");
     }
    
     qz.appendHex("x1Bx21x30"); // change text size
@@ -182,11 +180,11 @@ function print_footer(){
 	
 	qz.appendHex("x1Bx21x31"); // change text size
 	
-	qz.append(centerBigText("COMPROBANTE\n"));
+	qz.append(centerBigText("GRACIAS POR ELEGIRNOS\n"));
 	
 	qz.appendHex("x1Bx21x00"); // change text size
 	
-	qz.append(centerText("NO VALIDO COMO FACTURA\n"));
+	qz.append(centerText("Hasta la proxima!\n"));
 	
 	qz.appendHex("x0Dx0Ax0Dx0Ax0Dx0Ax0Dx0Ax0Dx0Ax0Dx0A");
 }
