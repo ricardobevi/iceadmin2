@@ -178,11 +178,7 @@ function print_body( items, total ){
 
 function print_footer(){
 	
-	qz.appendHex("x1Bx21x31"); // change text size
-	
-	qz.append(centerBigText("GRACIAS POR ELEGIRNOS\n"));
-	
-	qz.appendHex("x1Bx21x00"); // change text size
+	qz.append(centerText("GRACIAS POR ELEGIRNOS\n"));
 	
 	qz.append(centerText("Hasta la proxima!\n"));
 	
