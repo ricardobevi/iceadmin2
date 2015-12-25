@@ -93,6 +93,8 @@ class Ticket_List_Model extends CI_Model {
     public function close(){
 
         $ticket_items = $this->cart->contents();
+        
+        $subsidiary_id = $this->config->item('subsidiary_id');
 
         if( count( $this->cart->contents() ) > 0 ){
 
@@ -108,6 +110,7 @@ class Ticket_List_Model extends CI_Model {
                 $this->db->set('ticket_id', $ticket_id);
                 $this->db->set('price_id', $item['options']['price_id']);
                 $this->db->set('quantity', $item['qty']);
+                $this->db->set('subsidiary_id', $subsidiary_id);
                 $this->db->insert('product_ticket');
             }
 
@@ -158,6 +161,17 @@ class Ticket_List_Model extends CI_Model {
     private function obtain_product_info( $product_id ){
 
         $result = 0;
+        
+        $subsidiary_id = $this->config->item('subsidiary_id');
+        
+        /*
+          HAY QUE CORRER ESTE INSERT PARA LA ID DE SUCURSAL 2!
+          
+         insert into `product_price` (
+   			select `product_id`, `price_id`, 2 as subsidiary_id, sysdate() as set_date from `product_price`
+		 );
+         
+         */
 
         if ( $product_id !== null ){
 
@@ -168,7 +182,9 @@ class Ticket_List_Model extends CI_Model {
                 `product` P
                 JOIN `product_price` PP ON P.id = PP.product_id
                 JOIN `price` PR ON PP.price_id = PR.id
-            WHERE P.id = " . $product_id . " ;";
+            WHERE 
+            		P.id = " . $product_id . " 
+            		AND PP.subsidiary_id = " . $subsidiary_id . " ;";
 
             $query = $this->db->query($sql);
 
