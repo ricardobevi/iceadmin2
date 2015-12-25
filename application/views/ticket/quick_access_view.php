@@ -11,28 +11,65 @@
 
 	<div class="panel-body text-center">
 
+		<?php 
+			$buttons = array();
+		?>
+
         <?php foreach ($quickaccess as $quickaccess_item): ?>
 
-    		<?php if( ( $quickaccess_item['position'] % 3 ) == 0  ) echo '<div class="btn-group btn-group-lg" role="group">'; ?>
+    		<?php 
+    			if( ( $quickaccess_item['position'] % 3 ) == 0  ) {
+    				echo '<div class="btn-group btn-group-lg" role="group">';
+    			}
+    		?>
+
+				<?php ?>
 
     		    <?php
     		      $css_classes = "btn btn-default btn-block block quickaccess";
 
-    		      if( $quickaccess_item['position'] == 9 )
+    		      if( $quickaccess_item['position'] == 0 )
     		          $css_classes = $css_classes . " blockh2";
+    		      
+    		      
 
-		          echo '<button type="button"
+    		      $buttons[] = '<button type="button"
                                 class="'.$css_classes.'"
                                 style="white-space: normal;"
-                                productid="'.$quickaccess_item['product_id'].'">';
+                                productid="'.$quickaccess_item['product_id'].'"
+    							position="' . $quickaccess_item['group'] . ',' . $quickaccess_item['position'] .'">';
+    		      
+    		      $currentPos = count($buttons) - 1;
 
     		    ?>
 
-    			     <?php echo $quickaccess_item['label'];?>
+    			     <?php $buttons[$currentPos] = $buttons[$currentPos] . $quickaccess_item['label'];?>
 
     			</button>
 
-    		<?php if( ( ( $quickaccess_item['position'] + 1) % 3 == 0 ) || ( $quickaccess_item['position'] == 10 ) ) echo '</div>'; ?>
+    		<?php if(   ( ( $quickaccess_item['position'] - 1) % 3 == 0  ) || 
+    				    ( ( $quickaccess_item['position'] - 1)     == 0  ) || 
+    		                $quickaccess_item['position']          == -1 ) {
+    		           
+    		        $i = count($buttons);
+    		                	
+    		        if ( $quickaccess_item['position'] != -1 ) {
+	    		        for( $j = $i - 1 ; $j >= 0 ; $j-- ) {
+	    		        	echo $buttons[$j];
+	    		        }
+    		        } else {
+    		        	for( $j = 0 ; $j < $i ; $j++ ) {
+    		        		echo $buttons[$j];
+    		        	}
+    		        }
+
+    		        $buttons = array();
+    		                	
+    		      	echo '</div>'; 
+    		      } 
+    		?>
+    		
+    		
 
 		<?php endforeach ?>
 

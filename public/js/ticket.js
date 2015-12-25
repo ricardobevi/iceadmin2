@@ -229,14 +229,53 @@ function print_ticket(){
 	
 }
 
-var down = {};
-down['ctrl'] = 0;
+
 
 $(document).keydown(function(event) {
 
     if ( _DEBUG ) $("#debug").text( "DOWN " + event.keyCode );
-	
+    
+
     switch( event.keyCode ){
+   
+ 		case 110:
+			add_product($( "button[position='1,-1']" ).attr('productid'), 1);
+			break;
+    	case 96:
+    		add_product($( "button[position='1,0']" ).attr('productid'), 1);
+    		break;
+    		
+    	case 97:
+    		add_product($( "button[position='1,1']" ).attr('productid'), 1);
+    		break;
+    	case 98:
+    		add_product($( "button[position='1,2']" ).attr('productid'), 1);
+    		break;
+    	case 99:
+    		add_product($( "button[position='1,3']" ).attr('productid'), 1);
+    		break;
+    		
+    	case 100:
+    		add_product($( "button[position='1,4']" ).attr('productid'), 1);
+    		break;
+    	case 101:
+    		add_product($( "button[position='1,5']" ).attr('productid'), 1);
+    		break;
+    	case 102:
+    		add_product($( "button[position='1,6']" ).attr('productid'), 1);
+    		break;
+    		
+    	case 103:
+    		add_product($( "button[position='1,7']" ).attr('productid'), 1);
+    		break;
+    	case 104:
+    		add_product($( "button[position='1,8']" ).attr('productid'), 1);
+    		break;
+    	case 105:
+    		add_product($( "button[position='1,9']" ).attr('productid'), 1);
+    		break;
+    
+    
         case 17:
             $("#quick_access_group_1").addClass("collapse");
             $("#quick_access_group_2").removeClass("collapse");
@@ -249,6 +288,43 @@ $(document).keydown(function(event) {
     if ( event.ctrlKey ) {
 
         switch(event.which){
+	        case 110:
+				add_product($( "button[position='2,-1']" ).attr('productid'), 1);
+				break;
+	    	case 96:
+	    		add_product($( "button[position='2,0']" ).attr('productid'), 1);
+	    		break;
+	    		
+	    	case 97:
+	    		add_product($( "button[position='2,1']" ).attr('productid'), 1);
+	    		break;
+	    	case 98:
+	    		add_product($( "button[position='2,2']" ).attr('productid'), 1);
+	    		break;
+	    	case 99:
+	    		add_product($( "button[position='2,3']" ).attr('productid'), 1);
+	    		break;
+	    		
+	    	case 100:
+	    		add_product($( "button[position='2,4']" ).attr('productid'), 1);
+	    		break;
+	    	case 101:
+	    		add_product($( "button[position='2,5']" ).attr('productid'), 1);
+	    		break;
+	    	case 102:
+	    		add_product($( "button[position='2,6']" ).attr('productid'), 1);
+	    		break;
+	    		
+	    	case 103:
+	    		add_product($( "button[position='2,7']" ).attr('productid'), 1);
+	    		break;
+	    	case 104:
+	    		add_product($( "button[position='2,8']" ).attr('productid'), 1);
+	    		break;
+	    	case 105:
+	    		add_product($( "button[position='2,9']" ).attr('productid'), 1);
+	    		break;
+	        
             case 13:
                 print_ticket();
                 close_ticket();

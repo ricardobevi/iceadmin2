@@ -20,7 +20,7 @@ class Quick_Access_Model extends CI_Model {
          FROM
                 `quick_access` qa JOIN product p ON qa.product_id = p.id
          WHERE `qa`.`group` = " . $group . "
-         ORDER BY `qa`.`position`, `qa`.`group`";
+         ORDER BY  `qa`.`group`, `qa`.`position` desc";
 
         $query = $this->db->query($sql);
 
