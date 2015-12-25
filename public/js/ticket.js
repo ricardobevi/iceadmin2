@@ -138,7 +138,7 @@ function print_header(ticketNumber){
 
 function print_wifi(){
 	 qz.append(createLine());
-	 qz.append(centerText("Clave del WiFi: amores2039\n"));
+	 qz.append(centerText("Clave del WiFi:" + wifiPass + "\n"));
 	 qz.append(createLine());
 }
 

@@ -30,6 +30,8 @@
     <script type="text/JavaScript">
 
 	    var _DEBUG = true;
+
+	    var wifiPass = "<?php echo file_get_contents( site_url('wifi/pass/get_pass') . '/lala');?>";
 	
 	    var ticketUrl = "<?php echo site_url('ticket/ticket');?>";
 	
