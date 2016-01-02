@@ -26,7 +26,7 @@ if (! defined ( 'BASEPATH' ))
 					$date = date("z");
 				}
 				
-				$date = $date + 1; //para compensar que empieza desde 0
+				$date = sprintf("%03d", $date + 1); //para compensar que empieza desde 0
 				
 				$wifi_pass['wifi_pass'] = 'amores_' . substr(md5($date), -4);
 				
