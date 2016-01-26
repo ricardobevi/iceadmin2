@@ -1,5 +1,7 @@
 <?php $this->load->helper('url');?>
 
+<?php if ( !isset($load_printer) ) $load_printer = true; ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -52,8 +54,10 @@
 
     </script>
 
-    <script type="text/javascript" src="<?php echo base_url("public/js/vendor/qz-deploy.js");?>"></script>
-    <script type="text/javascript" src="<?php echo base_url("public/js/vendor/qz-print.js");?>"></script>
+	<?php if ( $load_printer ){ ?>
+	    <script type="text/javascript" src="<?php echo base_url("public/js/vendor/qz-deploy.js");?>"></script>
+	    <script type="text/javascript" src="<?php echo base_url("public/js/vendor/qz-print.js");?>"></script>
+    <?php }?>
     
     <script	src="<?php echo base_url("public/js/vendor/jquery.min.js");?>"></script>
     <script	src="<?php echo base_url("public/js/vendor/jquery.number.min.js");?>"></script>
