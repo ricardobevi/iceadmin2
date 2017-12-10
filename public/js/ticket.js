@@ -177,20 +177,21 @@ function print_body( items, total ){
 }
 
 function print_footer(){
+
+   var data = [
+      centerText("GRACIAS POR ELEGIRNOS\n"),
+      centerText("Hasta la proxima!\n"),
+      "\x0D\x0A\x0D\x0A\x0D\x0A\x0D\x0A\x0D\x0A\x0D\x0A"
+   ];
+
+   qz.print(config, data).catch(function(e) { console.error(e); });
 	
-	qz.append(centerText("GRACIAS POR ELEGIRNOS\n"));
-	
-	qz.append(centerText("Hasta la proxima!\n"));
-	
-	qz.appendHex("x0Dx0Ax0Dx0Ax0Dx0Ax0Dx0Ax0Dx0Ax0Dx0A");
 }
 
 
 function print_ticket(){
 	
-	if (notReady()) { return; }
-	
-
+/*
 	$.getJSON( ticketListUrl + "/json_print", function( data ) {
 		var items = [];
 		var total = 0;
@@ -226,7 +227,11 @@ function print_ticket(){
 		};
 
 	});
+
+*/
 	
+print_footer();
+
 }
 
 
