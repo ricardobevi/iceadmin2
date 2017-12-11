@@ -111,43 +111,54 @@ function close_ticket(){
 
 function print_number( ticketNumber ){
 	
-    var s = "000" + ticketNumber;
-    ticketNumberString = s.substr( s.length - 3 );
-		
-	qz.appendImage(ticketNumberImgUrl + "/print_number/" + ticketNumberString, "ESCP", "simple");
+	var s = "000" + ticketNumber;
+	ticketNumberString = s.substr( s.length - 3 );
+	
+	var numberUrl = ticketNumberImgUrl + "/print_number/" + ticketNumberString;
+
+	return numberUrl;
 	
 }
 
 
 function print_header(ticketNumber){
-	qz.appendHex("x1Bx40"); // start printer
-	
-    qz.append( centerText( underlineText("Heladeria Los Amores") ) + "\n");
-    
-    qz.append(centerText("Brown 67, Mar de Ajo\n"));
-    
-    qz.append(createLine());
-    
-    qz.append(centerText("Sera llamado por el numero: \n"));
-    
-    print_number( ticketNumber );
-    
-    qz.appendHex("x0Dx0A"); //newline
-    
+    var header = [
+       	"\x1B\x40",
+		centerText( underlineText("Heladeria Los Amores") ) + "\n",
+		centerText("Brown 67, Mar de Ajo\n"),
+		createLine(),/*
+		centerText("Sera llamado por el numero: \n"),
+		{ 
+			type: 'image',
+			data: print_number(ticketNumber),
+				options: { language: "ESCPOS", dotDensity: 'simple' }
+		}*/
+		"\x0D\x0A"
+    ];
+   
+   return header; 
 }
 
 function print_wifi(){
-	 qz.append(createLine());
-	 qz.append(centerText("Clave del WiFi:" + wifiPass + "\n"));
-	 qz.append(createLine());
+	
+	var wifi = [
+		createLine(),
+		centerText("Clave del WiFi:" + wifiPass + "\n"),
+		createLine()
+	];
+
+	return wifi;
+
 }
 
 function print_body( items, total ){
+
+	var body = [];
 	
 	total = formatCurrency(total);
 
-	qz.append("Cnt Descripcion           SubTot");
-	qz.append(createLine());
+	body.push("Cnt Descripcion           SubTot");
+	body.push(createLine());
 	
 	var itemLine = "";
 	var subtotal = "";
@@ -162,36 +173,39 @@ function print_body( items, total ){
     	
     	itemLine = itemLine + subtotal;
     	
-    	qz.append( itemLine + "\n");
+    	body.push( itemLine + "\n");
     }
    
-    qz.appendHex("x1Bx21x30"); // change text size
+    body.push("\x1B\x21\x30"); // change text size
     
-    qz.append(rightText("Total: " + total));
-    qz.appendHex("x0Dx0A"); //newline
+    body.push(rightText("Total: " + total));
+    body.push("\x0D\x0A"); //newline
     
-    qz.appendHex("x1Bx21x00"); // change text size
+    body.push("\x1B\x21\x00"); // change text size
     
-    qz.append(createLine());
+    body.push(createLine());
+
+	return body;
 	
 }
 
 function print_footer(){
 
-   var data = [
+   var footer = [
       centerText("GRACIAS POR ELEGIRNOS\n"),
       centerText("Hasta la proxima!\n"),
       "\x0D\x0A\x0D\x0A\x0D\x0A\x0D\x0A\x0D\x0A\x0D\x0A"
    ];
 
-   qz.print(config, data).catch(function(e) { console.error(e); });
-	
+   return footer;
 }
 
 
 function print_ticket(){
 	
-/*
+
+	var ticket = []; 
+
 	$.getJSON( ticketListUrl + "/json_print", function( data ) {
 		var items = [];
 		var total = 0;
@@ -210,9 +224,21 @@ function print_ticket(){
 			}
 			
 		});
+
+
+
 				
-		print_header( obtainTicketNumber() );
-			
+		ticket = ticket.concat(print_header( obtainTicketNumber() ));
+
+		ticket = ticket.concat(print_wifi());
+
+		ticket = ticket.concat(print_body(items, total));
+
+		ticket = ticket.concat(print_footer());
+
+		qz.print(config, ticket).catch(function(e) { console.error(e); });
+		
+			/*
 		window["qzDoneAppending"] = function() {
 						
 			print_wifi();
@@ -225,12 +251,15 @@ function print_ticket(){
 		    // Remove any reference to this function
 		    window['qzDoneAppending'] = null;
 		};
+*/
+
 
 	});
 
-*/
-	
-print_footer();
+
+
+
+
 
 }
 
