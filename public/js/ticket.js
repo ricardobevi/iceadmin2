@@ -2,6 +2,8 @@
 var _LINECHARS = 32;
 var _LINEBIGCHARS = 20;
 
+launchQZ();
+
 function obtainTicketNumber(){
 		
 	var ticketNumber = Cookies.get("ticket_number");
@@ -153,16 +155,17 @@ function print_wifi(){
 
 function print_body( items, total ){
 
-	var body = [];
+    var body = [];
 	
-	total = formatCurrency(total);
+    total = formatCurrency(total);
+	
+    body.push("Cnt Descripcion           SubTot");
+    body.push(createLine());
+	
+    var itemLine = "";
+    var subtotal = "";
+	
 
-	body.push("Cnt Descripcion           SubTot");
-	body.push(createLine());
-	
-	var itemLine = "";
-	var subtotal = "";
-	
     for ( itemNum = 0 ; itemNum < items.length ; itemNum++ ) {
     	var item = items[itemNum];
     	

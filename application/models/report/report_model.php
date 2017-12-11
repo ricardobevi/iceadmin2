@@ -12,7 +12,7 @@ class Report_Model extends CI_Model {
 
     public function query_report(){
 
-    $sql  = "SELECT P.label, SUM(PT.quantity), SUM(Pr.price)\n"
+    $sql  = "SELECT P.label AS product_name, SUM(PT.quantity) AS quantity, SUM(Pr.price) AS price\n"
     . "FROM \n"
     . "	ticket AS T \n"
     . "    JOIN product_ticket AS PT ON T.id = PT.ticket_id\n"
@@ -27,7 +27,7 @@ class Report_Model extends CI_Model {
 	$query = $this->db->query($sql);
 	
 	$result = $query->result_array ();
-
+	
         return $result;
     }
 

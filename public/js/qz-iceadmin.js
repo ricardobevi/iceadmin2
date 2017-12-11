@@ -82,11 +82,10 @@ qz.security.setCertificatePromise(function(resolve, reject) {
 /*
  *
  *
- * Inicio la conexion! @ricardobevi
+ * Inicio la config! @ricardobevi
  *
  *
  */
-launchQZ();
 var config = qz.configs.create("zebra");
 
     /// Connection ///
