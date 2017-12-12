@@ -103,7 +103,7 @@
 		total = total + parseFloat(item.price);
 
     		itemLine = item.quantity + " " + item.product_name;
-	    	subtotal = formatCurrency( item.price );
+	    	subtotal = formatCurrency( parseFloat(item.price) );
 	
 	    	itemLine = itemLine + repeatText(".", _LINECHARS - (itemLine.length + subtotal.length) );
 	    	
