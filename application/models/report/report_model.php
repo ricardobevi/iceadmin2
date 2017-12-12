@@ -10,7 +10,7 @@ class Report_Model extends CI_Model {
     }
 
 
-    public function query_report(){
+    public function query_report($date){
 
     $sql  = "SELECT P.label AS product_name, SUM(PT.quantity) AS quantity, SUM(Pr.price) AS price\n"
     . "FROM \n"
@@ -20,7 +20,7 @@ class Report_Model extends CI_Model {
     . "    JOIN product_price AS PP ON P.id = PP.product_id\n"
     . "    JOIN price AS Pr ON PP.price_id = Pr.id\n"
     . "WHERE \n"
-    . "	T.date_time BETWEEN '2017-12-10 06:00:00' AND '2017-12-10 06:00:00' + INTERVAL 23 HOUR + INTERVAL 59 MINUTE + INTERVAL 59 SECOND\n"
+    . "	T.date_time BETWEEN '".$date." 06:00:00' AND '".$date." 06:00:00' + INTERVAL 23 HOUR + INTERVAL 59 MINUTE + INTERVAL 59 SECOND\n"
     . "    \n"
     . "GROUP BY P.label";
 

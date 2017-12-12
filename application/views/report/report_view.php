@@ -88,7 +88,9 @@
 		return right;
 	}
 
-	var report = [];
+	var report_date = '<?php echo json_encode($report_date); ?>';
+
+	var report = ["Reporte del dia " + report_date + "\n"];
 
 	report.push(createLine());
 

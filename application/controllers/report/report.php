@@ -13,9 +13,10 @@ class Report extends CI_Controller {
 
     }
 
-    public function index() {
+    public function date($date) {
 
-	$data ['report_data'] = $this->report_model->query_report();
+	$data ['report_data'] = $this->report_model->query_report($date);
+	$data ['report_date'] = $date; 
         
         $this->load->view ( 'report/report_view', $data );
 
