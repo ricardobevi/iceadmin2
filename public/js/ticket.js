@@ -122,12 +122,48 @@ function print_number( ticketNumber ){
 	
 }
 
+function current_date(){
+
+var today = new Date();
+var dd = today.getDate();
+var mm = today.getMonth()+1; //January is 0!
+var yyyy = today.getFullYear();
+var hour = today.getHours();
+var minute = today.getMinutes();
+var second = today.getSeconds();
+
+
+if(dd < 10) {
+	dd = '0' + dd;
+} 
+
+if(mm < 10) {
+	mm = '0' + mm;
+} 
+
+if(hour < 10) {
+	hour = '0' + hour;	
+}
+
+if(minute < 10) {
+	minute = '0' + minute;
+}
+
+if(second < 10) {
+	second = '0' + second;
+}
+
+return dd + '/' + mm + '/' + yyyy + '   ' + hour + ':' + minute + ':' + second + '\n'
+
+}
+
 
 function print_header(ticketNumber){
     var header = [
        	"\x1B\x40",
 		centerText( underlineText("Heladeria Los Amores") ) + "\n",
 		centerText("Brown 67, Mar de Ajo\n"),
+	    	centerText(current_date()),
 		createLine(),/*
 		centerText("Sera llamado por el numero: \n"),
 		{ 
@@ -241,21 +277,6 @@ function print_ticket(){
 
 		qz.print(config, ticket).catch(function(e) { console.error(e); });
 		
-			/*
-		window["qzDoneAppending"] = function() {
-						
-			print_wifi();
-			print_body( items, total );
-			print_footer();
-
-		    // Tell the apple to print.
-		    qz.print();
-		    
-		    // Remove any reference to this function
-		    window['qzDoneAppending'] = null;
-		};
-*/
-
 
 	});
 
