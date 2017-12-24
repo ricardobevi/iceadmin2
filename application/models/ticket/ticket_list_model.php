@@ -184,13 +184,14 @@ class Ticket_List_Model extends CI_Model {
                 JOIN `price` PR ON PP.price_id = PR.id
             WHERE 
             		P.id = " . $product_id . " 
-            		AND PP.subsidiary_id = " . $subsidiary_id . " ;";
+			AND PP.subsidiary_id = " . $subsidiary_id . " 
+            ORDER BY PP.set_date DESC;";
 
             $query = $this->db->query($sql);
 
             $result = $query->result_array ();
 
-            if ( count($result) == 1 ){
+            if ( count($result) > 0 ){
                 $result = $result[0];
             } else {
                 $result = 0;
