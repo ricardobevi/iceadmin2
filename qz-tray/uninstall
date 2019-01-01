@@ -1,0 +1,64 @@
+#!/bin/bash
+
+echo -e "Stopping any running versions..."
+pkill -f "java -jar /opt/qz-tray/qz-tray.jar" > /dev/null 2>&1
+a=$?
+pkill -f "java -jar -Xms512m /opt/qz-tray/qz-tray.jar" > /dev/null 2>&1
+if [ $a -eq 0 -o $? -eq 0 ]; then
+    echo -e "   [\e[1;32msuccess\033[0m]"
+else
+    echo -e "   [\e[1;33mskipped\033[0m]"
+fi
+
+# Remove Firefox certificate
+"/opt/qz-tray/auth/firefox/firefox-cert.sh" "uninstall"
+
+echo -e "Cleaning up shortcuts and certificates..."
+# Remove startup entries and certificates for all users
+a=0
+b=0
+for i in /home/* ; do
+    # Remove 1.9/2.0 style startup shortcuts
+    if [ -n "qz-tray" ]; then
+    	rm "$i/.config/autostart/qz-tray.desktop" > /dev/null 2>&1
+    	let "a++"
+    fi
+    if [ -n "QZ Tray" ]; then
+    	rm "$i/.config/autostart/QZ Tray.desktop" > /dev/null 2>&1
+    	let "a++"
+    fi
+
+    certutil -D -d "sql:$i/.pki/nssdb" -n "QZ Industries, LLC" > /dev/null 2>&1
+    if [ $? -eq 0 ]; then
+        let "b++"
+    fi
+done
+
+if [ $a -ne 0 ]; then
+    echo -e "   [\e[1;32msuccess\033[0m] Removed $a startup entries"
+else
+    echo -e "   [\e[1;33mskipped\033[0m] No startup entries found"
+fi
+
+if [ $b -ne 0 ]; then
+    echo -e "   [\e[1;32msuccess\033[0m] Removed $b certificates"
+else
+    echo -e "   [\e[1;33mskipped\033[0m] No certificates found"
+fi
+
+echo -e "Removing application shortuct..."
+rm -rf "/usr/share/applications/qz-tray.desktop" > /dev/null 2>&1
+if [ $? -eq 0 ]; then
+    echo -e "   [\e[1;32msuccess\033[0m]"
+else
+    echo -e "   [\e[1;33mskipped\033[0m]"
+fi
+
+echo -e "Cleanup is complete.  Removing /opt/qz-tray..."
+rm -rf "/opt/qz-tray"
+if [ $? -eq 0 ]; then
+    echo -e "   [\e[1;32msuccess\033[0m]"
+fi
+
+echo -e "Finished.\n"
+exit 0
