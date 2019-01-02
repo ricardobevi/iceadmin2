@@ -44,21 +44,20 @@
 	    var ticketListUrl = "<?php echo site_url('ticket/ticket_list');?>";
 
 	    var ticketNumberImgUrl = "<?php echo site_url('ticket/ticket_number');?>";
-	
-	    var qzPrintAppletLocation = "<?php echo base_url('public/applet/qz-print.jar');?>";
-	    var qzPrintAppletJNLPLocation = "<?php echo base_url('public/applet/qz-print_jnlp.jnlp');?>";
-	
 	    
 
     </script>
 
-    <script type="text/javascript" src="<?php echo base_url("public/js/vendor/qz-deploy.js");?>"></script>
-    <script type="text/javascript" src="<?php echo base_url("public/js/vendor/qz-print.js");?>"></script>
-    
+ 
     <script	src="<?php echo base_url("public/js/vendor/jquery.min.js");?>"></script>
     <script	src="<?php echo base_url("public/js/vendor/jquery.number.min.js");?>"></script>
     <script	src="<?php echo base_url("public/js/vendor/js-cookie.js");?>"></script>
     
+    <script type="text/javascript" src="<?php echo base_url("public/qz/dependencies/rsvp-3.1.0.min.js");?>"></script>
+    <script type="text/javascript" src="<?php echo base_url("public/qz/dependencies/sha-256.min.js");?>"></script>
+    <script type="text/javascript" src="<?php echo base_url("public/qz/qz-tray.js");?>"></script>
+
+    <script type="text/javascript" src="<?php echo base_url("public/js/qz-iceadmin.js");?>"></script>
 
     <script type="text/JavaScript" src="<?php echo base_url("public/js/main.js");?>"></script>
     <script type="text/JavaScript" src="<?php echo base_url("public/js/ticket.js");?>"></script>
