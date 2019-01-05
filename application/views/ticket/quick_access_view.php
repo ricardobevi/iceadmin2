@@ -39,8 +39,7 @@
 
     			</button>
 
-    		<?php if(   ( ( $quickaccess_item['position'] - 1) % 3 == 0  ) || 
-    				    ( ( $quickaccess_item['position'] - 1)     == 0  )) {
+    		<?php if( count($buttons) >= 3) {
     		           
     		        $i = count($buttons);    		                	
     		        
