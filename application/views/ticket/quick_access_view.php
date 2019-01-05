@@ -41,7 +41,7 @@
     		           
     		        $button_count = count($buttons);    
     		        
-    		        for( $j = $button_count - 1 ; $j >= 0 ; $j-- ) {
+    		        for( $j = 0 ; $j < $button_count ; $j++ ) {
     		        	echo $buttons[$j];
     		        }
    
@@ -57,6 +57,28 @@
     		
 
 		<?php endforeach ?>
+		
+		
+		
+    	<?php 
+    	
+    	
+    	if( $possition > 0) {
+           
+            $button_count = count($buttons);    
+            
+            for( $j = 0 ; $j < $button_count ; $j++ ) {
+            	echo $buttons[$j];
+            }
+        
+            $buttons = array();
+                    	
+          	echo '</div>'; 
+          	
+          	$possition = 0;
+        } 
+      
+		?>
 
 
 	</div>
