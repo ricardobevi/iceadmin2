@@ -37,7 +37,7 @@
 
     			</button>
 
-    		<?php if( $possition >= 2) {
+    		<?php if( $possition > 2) {
     		           
     		        $button_count = count($buttons);    
     		        
