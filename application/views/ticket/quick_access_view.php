@@ -1,4 +1,4 @@
-<div id="quick_access_group_<?php echo $group; ?>" class="panel panel-default">
+<div id="quick_access_group_1" class="panel panel-default">
 
 	<div class="panel-body text-center">
 
