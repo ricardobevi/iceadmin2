@@ -46,13 +46,6 @@ class Quick_Access_Model extends CI_Model {
         
         $result = $query->result_array ();
         
-        if ( count($result) > 0 ){
-            $result = $result[0];
-        } else {
-            $result = 0;
-        }
-        
-        
         return $result;
         
     }

@@ -22,7 +22,7 @@ class Quick_Access extends CI_Controller {
 
     public function group($group = 1) {
 
-        $data ['quickaccess'] = $this->quick_access_model->get_quick_accesses ($group);
+        $data ['quickaccess'] = $this->quick_access_model->get_products();
 
         $this->load->view ( 'ticket/quick_access_view', $data );
 
