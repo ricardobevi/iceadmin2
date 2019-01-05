@@ -36,14 +36,11 @@ class Quick_Access_Model extends CI_Model {
         
         $sql =
         "SELECT
-                P.id, P.label AS name, PR.price, PR.id as price_id
+                P.id AS product_id,
+                P.label
             FROM
                 `product` P
-                JOIN `product_price` PP ON P.id = PP.product_id
-                JOIN `price` PR ON PP.price_id = PR.id
-            WHERE
-            	PP.set_date = (SELECT MAX(PP2.set_date) FROM `product_price` PP2 WHERE PP.price_id = PP2.price_id)
-            ORDER BY PP.set_date DESC;";
+        ORDER BY P.name;";
         
         $query = $this->db->query($sql);
         

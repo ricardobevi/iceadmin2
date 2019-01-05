@@ -14,23 +14,7 @@ class Quick_Access extends CI_Controller {
 
     public function index() {
 
-        $data ['quickaccess'] = $this->quick_access_model->get_quick_accesses (2);
-
-        $data ['group'] = 2;
-
-        $data ['hidden'] = true;
-
-        $hidden_view = $this->load->view ( 'ticket/quick_access_view', $data, true );
-
-
-
-        $data ['quickaccess'] = $this->quick_access_model->get_quick_accesses (1);
-
-        $data ['group'] = 1;
-
-        $data ['hidden'] = false;
-
-        $data ['hidden_view'] = $hidden_view;
+        $data ['quickaccess'] = $this->quick_access_model->get_products();
 
         $this->load->view ( 'ticket/quick_access_view', $data);
 

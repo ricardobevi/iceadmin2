@@ -6,10 +6,17 @@
 			$buttons = array();
 		?>
 
-        <?php foreach ($quickaccess as $quickaccess_item): ?>
+        <?php 
+        
+        
+            foreach ($quickaccess as $quickaccess_item): 
+            
+            
+            $possition = 1;
+         ?>
 
     		<?php 
-    			if( ( $quickaccess_item['position'] % 3 ) == 0  ) {
+    		if( ( $possition % 3 ) == 0  ) {
     				echo '<div class="btn-group btn-group-lg" role="group">';
     			}
     		?>
@@ -18,18 +25,12 @@
 
     		    <?php
     		      $css_classes = "btn btn-default btn-block block quickaccess";
-
-    		      /*
-    		      if( $quickaccess_item['position'] == 0 )
-    		          $css_classes = $css_classes . " blockh2";
-    		      */
     		      
 
     		      $buttons[] = '<button type="button"
                                 class="'.$css_classes.'"
                                 style="white-space: normal;"
-                                productid="'.$quickaccess_item['product_id'].'"
-    							position="' . $quickaccess_item['group'] . ',' . $quickaccess_item['position'] .'">';
+                                productid="'.$quickaccess_item['product_id'].'">';
     		      
     		      $currentPos = count($buttons) - 1;
 
@@ -41,9 +42,9 @@
 
     		<?php if( count($buttons) >= 3) {
     		           
-    		        $i = count($buttons);    		                	
+    		        $button_count = count($buttons);    
     		        
-    		        for( $j = $i - 1 ; $j >= 0 ; $j-- ) {
+    		        for( $j = $button_count - 1 ; $j >= 0 ; $j-- ) {
     		        	echo $buttons[$j];
     		        }
    
@@ -51,6 +52,9 @@
     		                	
     		      	echo '</div>'; 
     		      } 
+    		      
+    		      
+    		      $possition++;
     		?>
     		
     		
