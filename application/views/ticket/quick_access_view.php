@@ -4,19 +4,15 @@
 
 		<?php 
 			$buttons = array();
+			$possition = 0;
 		?>
 
         <?php 
-        
-        
             foreach ($quickaccess as $quickaccess_item): 
-            
-            
-            $possition = 1;
-         ?>
+        ?>
 
     		<?php 
-    		if( ( $possition % 3 ) == 0  ) {
+    		if( $possition == 0  ) {
     				echo '<div class="btn-group btn-group-lg" role="group">';
     			}
     		?>
@@ -33,6 +29,7 @@
                                 productid="'.$quickaccess_item['product_id'].'">';
     		      
     		      $currentPos = count($buttons) - 1;
+    		      $possition++;
 
     		    ?>
 
@@ -40,7 +37,7 @@
 
     			</button>
 
-    		<?php if( count($buttons) >= 3) {
+    		<?php if( $possition >= 2) {
     		           
     		        $button_count = count($buttons);    
     		        
@@ -51,10 +48,10 @@
     		        $buttons = array();
     		                	
     		      	echo '</div>'; 
+    		      	
+    		      	$possition = 0;
     		      } 
     		      
-    		      
-    		      $possition++;
     		?>
     		
     		
