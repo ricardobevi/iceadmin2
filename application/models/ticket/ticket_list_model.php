@@ -41,7 +41,7 @@ class Ticket_List_Model extends CI_Model {
 
                     $product_info['qty'] = $total_qty;
 
-                    $product_info['options'] = array( 'price_id' => $product_info['price_id']);
+                    $product_info['options'] = array( 'price' => $product_info['price']);
 
                     $this->cart->insert($product_info);
 
@@ -108,7 +108,7 @@ class Ticket_List_Model extends CI_Model {
             foreach ($ticket_items as $item) {
                 $this->db->set('product_id', $item['id']);
                 $this->db->set('ticket_id', $ticket_id);
-                $this->db->set('price_id', $item['options']['price_id']);
+                $this->db->set('price', $item['options']['price']);
                 $this->db->set('quantity', $item['qty']);
                 $this->db->set('subsidiary_id', $subsidiary_id);
                 $this->db->insert('product_ticket');
@@ -177,15 +177,14 @@ class Ticket_List_Model extends CI_Model {
 
             $sql =
             "SELECT
-                P.id, P.label AS name, PR.price, PR.id as price_id
+                P.id, P.label AS name, PP.price
             FROM
                 `product` P
                 JOIN `product_price` PP ON P.id = PP.product_id
-                JOIN `price` PR ON PP.price_id = PR.id
             WHERE 
-            		P.id = " . $product_id . " 
-			AND PP.subsidiary_id = " . $subsidiary_id . " 
-            ORDER BY PP.set_date DESC;";
+            		P.id = ". $product_id ."
+					AND PP.subsidiary_id = ". $subsidiary_id ."
+                    AND PP.set_date = (SELECT MAX(PP2.set_date) FROM `product_price` PP2 WHERE P.id = PP2.product_id)";
 
             $query = $this->db->query($sql);
 
